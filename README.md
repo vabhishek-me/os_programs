@@ -1,3 +1,3 @@
-# Operating System Algorithm Implementation/Simulation Programs
+## Operating System Algorithms Implementation/Simulation Programs
 
 
