@@ -20,7 +20,11 @@ int main(int argc, char** argv) {
 	pthread_create(&tid, &attr, fibo, num);
 
 	pthread_join(tid, (void **) &ans);
+
 	printf("The fibonacci of %lld = %lld \n", *num, *ans);
+
+	free(num);
+	free(ans);
 }
 
 void* fibo(void *arg) {
