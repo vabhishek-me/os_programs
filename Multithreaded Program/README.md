@@ -1,4 +1,4 @@
-# Sum Using A Multithreaded Program
+## Sum Using A Multithreaded Program
 
 This program takes command line arguments to create multiple threads and execute them to get the sum of different numbers passed to it.
 
