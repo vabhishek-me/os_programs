@@ -32,10 +32,10 @@ int main() {
 	int i=0;
 
 	for(i=0; i<readers; i++)
-		pthread_create(&readers_t[i], NULL, reader_func, (void *)i);
+		pthread_create(&readers_t[i], NULL, reader_func, &i);
 
 	for(i=0; i<writers; i++)
-		pthread_create(&writers_t[i], NULL, writer_func, (void *)i);
+		pthread_create(&writers_t[i], NULL, writer_func, &i);
 
 	for(i=0; i<writers; i++)
 		pthread_join(writers_t[i], NULL);
@@ -45,7 +45,7 @@ int main() {
 }
 
 void *reader_func(void *r) {
-	int rNo = (int)r + 1;
+	int rNo = *((int *)r) + 1;
 	printf("\n reader %d : wanting to read", rNo);
 	sleep(rand()%sleepMod);
 	sem_wait(&readAccess);
@@ -68,11 +68,11 @@ void *reader_func(void *r) {
 	sem_post(&readAccess);
 	printf("\n reader %d : finished", rNo);
 	sleep(rand()%sleepMod);
-	return NULL;
+	pthread_exit(0);
 }
 
 void *writer_func(void *w) {
-	int wNo = (int)w + 1;
+	int wNo = *((int *)w) + 1;
 	printf("\n writer %d : wanting to write", wNo);
 	sleep(rand()%sleepMod);
 	sem_wait(&bookAccess);
@@ -83,5 +83,5 @@ void *writer_func(void *w) {
 	sem_post(&bookAccess);
 	printf("\n writer %d : finished", wNo);
 	sleep(rand()%sleepMod);
-	return NULL;
+	pthread_exit(0);
 }
