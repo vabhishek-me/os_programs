@@ -17,9 +17,9 @@ void *writer_func(void *);
 int main() {
 	srand(time(0));
 	int readers, writers;
-	printf("Number of readers (max 5): ");
+	printf("Number of readers (max 50): ");
 	scanf("%d", &readers);
-	printf("Number of writers (max 5): ");
+	printf("Number of writers (max 50): ");
 	scanf("%d", &writers);
 
 	// set sleep mod
