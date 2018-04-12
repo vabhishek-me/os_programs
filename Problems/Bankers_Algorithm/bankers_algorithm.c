@@ -111,6 +111,7 @@ int main(int argc, char** argv) {
         printf("\nAll Processes Finished\n");	
 	
 	// free resources
+	free(processes);
         free(resources);
         for(int i=0; i<nProcesses; i++) {
                 free(allocated[i]);
