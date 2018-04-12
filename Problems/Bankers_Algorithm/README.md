@@ -22,6 +22,9 @@ gcc bankers_algorithm.c -std=c99 -pthread -o bankers_algorithm
 
 # execute
 ./bankers_algorithm
+
+# execute with testcase input 1
+./bankers_algorithm < testcases/input1.txt
 ```
 
 
