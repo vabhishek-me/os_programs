@@ -1,7 +1,7 @@
 # Operation System Problems
 
- - [Readers Writers Problem](./Readers_Writers_Problem/)
+ - [Readers Writers Problem](./Readers Writers Problem/)
 
- - [PID Manager](./PID_Manager)
+ - [PID Manager](./PID Manager)
 
- - [Bankers Algorithm](./Bankers_Algorithm)
+ - [Bankers Algorithm](./Bankers Algorithm)
