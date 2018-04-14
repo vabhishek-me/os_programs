@@ -19,6 +19,14 @@ int main(int argc, char** args) {
 
 	pthread_detach(tid);
 
+	/* or
+	 *
+	 * pthread_attr_t attr;
+	 * pthread_attr_init(&attr);
+	 * pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+	 *
+	 */
+
 	if( pthread_create(&tid, NULL, threadFunc, NULL) ) {
 		printf("\nERROR: pthread_create failed\n");
           	exit(-1);
