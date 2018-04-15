@@ -83,6 +83,22 @@ The subroutines which comprise the Pthreads API can be informally grouped into f
 
  - ` pthread_equal ` compares two thread IDs. If the two IDs are different 0 is returned, otherwise a non-zero value is returned.
 
+
+#### Programs
+
+  - Thread Creation & Termination - [pthread_creation_termination.c](./pthread_creation_termination.c)
+
+  - Explicity Joinable Threads - [pthread_explicitly_joinable.c](./pthread_explicitly_joinable.c)
+
+  - Detached Threads - [pthread_detached.c](./pthread_detached.c)
+
+  - Cancel Other Threads - [pthread_cancel_thread.c](./pthread_cancel_thread.c)
+
+  - Call A Function Once In All Threads - [pthread_once.c](./pthread_once.c)
+
+  - Thread Returning Value - [pthread_return_value.c](./pthread_return_value.c)
+
+
 ```c
 
   // pthread variable
@@ -183,6 +199,13 @@ It also provides the ability to set a thread's scheduling priority value.
     - If the mutex was already unlocked
     - If the mutex is owned by another thread
 
+#### Programs
+
+  - Mutex with lock/unlock (Blocking) - [mutex_lock.c](./mutex_lock.c)
+
+  - Mutex with trylock/unlock (Non-Blocking) - [mutex_trylock.c](./mutex_trylock.c)
+
+
 ```c
 
   // pthread mutex variable
@@ -258,6 +281,9 @@ It also provides the ability to set a thread's scheduling priority value.
 
   - The ` pthread_cond_broadcast() ` routine should be used instead of ` pthread_cond_signal() ` if more than one thread is in a blocking wait state.
 
+#### Programs
+
+  - Usage of condition variable for sequence scheduling - [condition.c](./condition.c)
 
 ```c
 
@@ -298,11 +324,6 @@ It also provides the ability to set a thread's scheduling priority value.
   pthread_condattr_destroy(&cattr);
 
 ```
-
-### Examples
-
- - pthread returning value using pthread_exit() and pthread_join() [pthread_return_value.c](./pthread_return_value.c)
-
 
 #### Learning Resources
 
