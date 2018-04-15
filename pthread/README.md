@@ -16,6 +16,8 @@ The subroutines which comprise the Pthreads API can be informally grouped into f
 
  - **Synchronization:** Routines that manage read/write locks and barriers.
 
+---
+
 ### Naming Conventions
 
 |     Routine Prefix      |      Functional Group       |
@@ -29,6 +31,8 @@ The subroutines which comprise the Pthreads API can be informally grouped into f
 |` pthread_key_ `         | Thread-specific data keys |
 |` pthread_rwlock_ `      | Read/write locks |
 |` pthread_barrier_ `     | Synchronization barriers |
+
+---
 
 ### Thread Management
 
@@ -159,6 +163,7 @@ The Pthreads API provides several routines that may be used to specify how threa
 For example, threads can be scheduled to run FIFO (first-in first-out), RR (round-robin) or OTHER (operating system determines).
 It also provides the ability to set a thread's scheduling priority value.
 
+---
 
 ### Mutexes
 
@@ -248,6 +253,7 @@ It also provides the ability to set a thread's scheduling priority value.
   pthread_mutexattr_destroy(&lock_attr);
 ```
 
+---
 
 ### Condition Variables
 
@@ -324,6 +330,8 @@ It also provides the ability to set a thread's scheduling priority value.
   pthread_condattr_destroy(&cattr);
 
 ```
+
+---
 
 #### Learning Resources
 
