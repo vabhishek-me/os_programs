@@ -197,7 +197,7 @@ It also provides the ability to set a thread's scheduling priority value.
    */
 
   // create mutex with default attributes
-  pthread_mutex_init(&lock);
+  pthread_mutex_init(&lock, NULL);
 
   // create mutex with attributes
   pthread_mutexattr_t lock_attr;
@@ -223,6 +223,80 @@ It also provides the ability to set a thread's scheduling priority value.
 
   // destroy mutex attribute
   pthread_mutexattr_destroy(&lock_attr);
+```
+
+
+### Condition Variables
+
+  - While mutexes implement synchronization by controlling thread access to data, condition variables allow threads to synchronize based upon the actual value of data.
+
+  - A condition variable is always used in conjunction with a mutex lock.
+
+  - Condition variables must be declared with type ` pthread_cond_t `, and must be initialized before they can be used. There are two ways to initialize a condition variable:
+
+    - Statically, when it is declared. For example: ` pthread_cond_t myconvar = PTHREAD_COND_INITIALIZER; `
+
+    - Dynamically, with the ` pthread_cond_init() ` routine.
+
+  - The optional attr object is used to set condition variable attributes. There is only one attribute defined for condition variables: process-shared, which allows the condition variable to be seen by threads in other processes. The attribute object, if used, must be of type ` pthread_condattr_t ` (may be specified as NULL to accept defaults).
+
+  - The ` pthread_condattr_init() ` and ` pthread_condattr_destroy() ` routines are used to create and destroy condition variable attribute objects.
+
+  - ` pthread_cond_destroy() ` should be used to free a condition variable that is no longer needed.
+
+  - ` pthread_cond_wait() ` blocks the calling thread until the specified condition is signalled. This routine should be called while mutex is locked, and it will automatically release the mutex while it waits. After signal is received and thread is awakened, mutex will be automatically locked for use by the thread. The programmer is then responsible for unlocking mutex when the thread is finished with it.
+
+  - **Recommendation:** Using a WHILE loop instead of an IF statement to check the waited for condition can help deal with several potential problems, such as:
+
+     - If several threads are waiting for the same wake up signal, they will take turns acquiring the mutex, and any one of them can then modify the condition they all waited for.
+
+     - If the thread received the signal in error due to a program bug
+
+     - The Pthreads library is permitted to issue spurious wake ups to a waiting thread without violating the standard.
+
+  - The ` pthread_cond_signal() ` routine is used to signal (or wake up) another thread which is waiting on the condition variable. It should be called after mutex is locked, and must unlock mutex in order for ` pthread_cond_wait() ` routine to complete.
+
+  - The ` pthread_cond_broadcast() ` routine should be used instead of ` pthread_cond_signal() ` if more than one thread is in a blocking wait state.
+
+
+```c
+
+  // condition variable
+  pthread_cond_t condition;
+  
+
+  // static initialization
+  pthread_cond_t condition = PTHREAD_COND_INITIALIZER;
+
+  /*
+   * dynamic initialization
+   */
+
+  // create condition variable with default attributes
+  pthread_cond_init(&condition, NULL);
+
+  // create condition variable with attributes
+  pthread_condattr_t cattr;
+  pthread_condattr_init(&cattr);
+  pthread_cond_init(&condition, &cattr);
+
+  
+  // check and wait for condition
+  pthread_cond_wait(&condition, &lock);
+
+  // unblock one single thread waiting for a condition variable
+  pthread_cond_signal(&condition);
+
+  // unblock all threads waiting for a condition variable
+  pthread_cond_broadcast(&condition);
+
+
+  // destroy condition variable
+  pthread_cond_destroy(&condition);
+
+  // destroy condition attributes
+  pthread_condattr_destroy(&cattr);
+
 ```
 
 ### Examples
