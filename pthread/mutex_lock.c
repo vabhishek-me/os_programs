@@ -32,12 +32,12 @@ int main(int argc, char** argv) {
   for(long i=0; i<TMAX; i++)
     pthread_create(&tids[i], NULL, threadFunc, (void *)i);
 
-  printf("\nBoth threads created\n");
+  printf("\nAll threads created\n");
 
   for(long i=0; i<TMAX; i++)
     pthread_join(tids[i], NULL);
 
-  printf("\nBoth threads joined\n");
+  printf("\nAll threads joined\n");
 
   pthread_mutex_destroy(&lock);
   return 0;
